@@ -176,6 +176,9 @@ def main():
                         if check_win_optimize(board, row, col):
                             logs.append("Bạn đã thắng")
                             game_over = True
+                        elif not np.any(board == 0):
+                            logs.append("Hòa")
+                            game_over = True
                         
                         current_player *= -1
         if current_player == -1 and not game_over:
@@ -186,6 +189,9 @@ def main():
 
                 if check_win_optimize(board, row_ai, col_ai):
                     logs.append("Máy đã thắng")
+                    game_over = True
+                elif not np.any(board == 0):
+                    logs.append("Hòa")
                     game_over = True
                 
                 current_player *= -1            

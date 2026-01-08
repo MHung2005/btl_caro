@@ -48,7 +48,7 @@ def get_heristic_moves(board, ai_player):
 
         board[r,c] = 0
 
-        total_at_this_spot = attack_score - defense_score
+        total_at_this_spot = attack_score + defense_score
         if total_at_this_spot > best_score:
             best_score = total_at_this_spot
             best_moves = (r, c)
