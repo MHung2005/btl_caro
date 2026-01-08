@@ -5,7 +5,7 @@ from ai.minimax import get_minimax_moves
 from ai.alpha_beta import get_alpha_beta_moves
 
 WIDTH = 600
-WIDTH_SCREEN = 1200
+WIDTH_SCREEN = 1100
 SIZE_BOARD = 10
 SQUARE_SIZE = WIDTH // SIZE_BOARD
 LINE_WIDTH = 2
@@ -101,7 +101,9 @@ def check_win_optimize(board, r, c):
 
 def get_ai_move_by_mode(board, mode, logs):
     if mode == HERISTIC:
-        return get_heristic_moves(board, -1)
+        move, nodes = get_heristic_moves(board, -1)
+        logs.append(f"Số node duyệt của Heristic: {nodes}")
+        return move
     
     if mode == MINIMAX:
         move, nodes = get_minimax_moves(board, 2)

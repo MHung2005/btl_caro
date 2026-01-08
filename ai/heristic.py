@@ -22,6 +22,7 @@ def get_heristic_moves(board, ai_player):
     best_moves = None
     opponent = -ai_player
     valid_moves = get_potential_moves(board)
+    node_count = len(valid_moves)
     
     must_block_moves = []
     
@@ -54,7 +55,7 @@ def get_heristic_moves(board, ai_player):
             
         print(f"{r}, {c}: {best_score}")
     
-    return best_moves
+    return best_moves, node_count
 
 
 
