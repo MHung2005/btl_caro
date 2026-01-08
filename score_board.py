@@ -5,34 +5,37 @@ def evaluate_window(window, player):
     score = 0
     opponent = -player
     
-    # Chuyển window thành numpy array nếu chưa phải
-    window = np.asarray(window, dtype=np.int32)
+    window = list(window)
 
-    cp = np.count_nonzero(window == player)
-    co = np.count_nonzero(window == opponent)
-    ce = 5 - cp - co
+    cp = window.count(player)
+    co = window.count(opponent)
+    ce = window.count(0)
 
-    # Tấn công - AI có quân
     if cp == 5: 
-        return 100000
+        return 1000000
     if cp == 4 and ce == 1: 
-        score += 800  # Giảm từ 1000 xuống 800
+        score += 10000  
     if cp == 3 and ce == 2: 
-        score += 80   # Giảm từ 100 xuống 80
+        if window == [0, player, player, player, 0]:
+            score += 5000
+        else:
+            score += 500
     if cp == 2 and ce == 3: 
-        score += 8    # Giảm từ 10 xuống 8
+        score += 100 
     if cp == 1 and ce == 4: 
         score += 1
 
-    # Phòng thủ - Đối thủ có quân (ưu tiên cao hơn tấn công)
     if co == 5: 
-        return -100000
+        return -1000000
     if co == 4 and ce == 1: 
-        score -= 2000  # Tăng từ -1000 lên -2000 (phòng thủ quan trọng)
+        score -= 80000
     if co == 3 and ce == 2: 
-        score -= 200   # Tăng từ -100 lên -200
+        if window == [0, opponent, opponent, opponent, 0]:
+            score -= 40000
+        else:
+            score -= 2000
     if co == 2 and ce == 3: 
-        score -= 20    # Tăng từ -10 lên -20
+        score -= 200 
 
     return score
 

@@ -21,10 +21,24 @@ def get_heristic_moves(board, ai_player):
     best_score = -10**18
     best_moves = None
     opponent = -ai_player
-    potential_moves = get_potential_moves(board)
+    valid_moves = get_potential_moves(board)
     
+    must_block_moves = []
+    
+    for r, c in valid_moves:
+        board[r, c] = opponent
+        opponent_score = get_total_score(board, opponent)
+        board[r, c] = 0
+        
+        if opponent_score > 50000:
+            must_block_moves.append((r, c))
 
-    for r, c in potential_moves:
+    if must_block_moves:
+        moves_to_check = must_block_moves
+    else:
+        moves_to_check = valid_moves
+
+    for r, c in moves_to_check:
         board[r, c] = ai_player
         attack_score = get_total_score(board, ai_player)
 
