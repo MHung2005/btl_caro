@@ -21,6 +21,7 @@ def minimax_alpha_beta(board, depth, alpha, beta, maximizingPlayer):
 
             if beta <= alpha:
                 break
+        return maxVal
     else:
         minVal = float('inf')
         for r, c in valid_moves:
